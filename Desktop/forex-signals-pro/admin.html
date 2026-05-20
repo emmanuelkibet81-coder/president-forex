@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <header>
+     <h2 class="logo">Admin Panel</h2>
+         <nav>
+           <a href="index.html">Home</a>
+           <a href="dashboard.html">Dashboard</a>
+           <a href="#" onclick="logout()">Logout</a>
+         </nav>
+    </header>
+
+    <section class="dashboard">
+        <h1>Add New Signal</h1>
+
+        <input type="text" id="pair" placeholder="Pair (e.g. GOLD)">
+        <input type="text" id="type" placeholder="Type (BUY or SELL)">
+        <input type="text" id="entry" placeholder="Entry">
+        <input type="text" id="tp" placeholder="Take Profit">
+        <input type="text" id="sl" placeholder="Stop Loss">
+
+        <br><br>
+        <button onclick="addSignal()">Add Signal</button>
+        
+        <div id="signals-container"></div>
+    </section>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
