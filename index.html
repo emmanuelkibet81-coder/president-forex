@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forex Signals Pro</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header>
+    <h2 class="logo">ForexSignalsPro</h2>
+    <nav>
+        <a href="#">Home</a>
+        <a href="dashboard.html">Signals</a>
+        <a href="login.html">Admin</a>
+    </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Premium Forex Signals</h1>
+    <p>Trade Gold & EURUSD with high accuracy signals</p>
+    <button onclick="window.location.href='dashboard.html'">Get Signals</button>
+</section>
+
+<section style="padding: 40px;">
+    <h2 style="text-align:center;">Live Market Chart</h2>
+
+    <div class="tradingview-widget-container">
+        <div id="tradingview_chart"></div>
+    </div>
+</section>
+
+<script src="https://s3.tradingview.com/tv.js"></script>
+
+<script>
+new TradingView.widget({
+    "width": "100%",
+    "height": 500,
+    "symbol": "FX:XAUUSD", // GOLD
+    "interval": "5",
+    "timezone": "Africa/Nairobi",
+    "theme": "dark",
+    "style": "1",
+    "locale": "en",
+    "toolbar_bg": "#0a0f1c",
+    "enable_publishing": false,
+    "allow_symbol_change": true,
+    "container_id": "tradingview_chart",
+    "studies": [
+        "Moving Average",
+        "RSI"
+    ]
+});
+</script>
+
+<!-- STRATEGY -->
+<section class="section">
+    <h2>Our Strategy</h2>
+    <p>We use a combination of scalping and day trading strategies focused on GOLD and EURUSD. Our signals are based on technical analysis, market structure, and price action.</p>
+</section>
+
+<!-- WHY US -->
+<section class="section">
+    <h2>Why Choose Us</h2>
+    <ul>
+        <li>✔ High accuracy signals</li>
+        <li>✔ Fast execution alerts</li>
+        <li>✔ Expert analysis</li>
+        <li>✔ Beginner friendly</li>
+    </ul>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+    <h2>Contact Us</h2>
+    <p>WhatsApp: +254 726439553</p>
+    <p>Email: emmanuelkibet81@gmail.com</p>
+    <p>Facebook: @kibe ke</p>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="section">
+    <h2>Disclaimer</h2>
+    <p>
+        Trading forex involves significant risk and may not be suitable for all investors.
+        We are not responsible for any losses incurred. Always trade responsibly.
+    </p>
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>
