@@ -56,6 +56,8 @@ function loadSignals() {
 
         container.appendChild(card);
     });
+
+    updateStats();
 }
 
 // RUN FUNCTION
@@ -81,7 +83,7 @@ function addSignal(pair, type, entry, tp, sl) {
 
     localStorage.setItem("signals", JSON.stringify(signals));
 
-    alert("Signal Saved!");
+    updateStats();
     alert("🚀 New Signal Added!");
 }
 
@@ -89,13 +91,16 @@ function addSignal(pair, type, entry, tp, sl) {
 function deleteSignal(index) {
     signals.splice(index, 1);
     localStorage.setItem("signals", JSON.stringify(signals));
+    updateStats();
     loadSignals();
+
 }
 
 // CLOSE SIGNAL
 function closeSignal(index) {
     signals[index].status = "CLOSED";
     localStorage.setItem("signals", JSON.stringify(signals));
+    updateStats();
     loadSignals();
 }
 
@@ -129,11 +134,34 @@ function calculateProfit() {
 }
 
 function updateStats() {
+    const totalEl = document.getElementById("total");
+    const closedEl = document.getElementById("closed");
+
+    if (!totalEl || !closedEl) return;
+
     const total = signals.length;
     const closed = signals.filter(s => s.status === "CLOSED").length;
 
-    document.getElementById("total").innerText = total;
-    document.getElementById("closed").innerText = closed;
+    totalEl.innerText = total;
+    closedEl.innerText = closed;
 }
 
-updateStats();
+function register() {
+    const username = document.getElementById("regUsername").value;
+    const password = document.getElementById("regPassword").value;
+
+    if (!username || !password) {
+        alert("Please fill all fields");
+        return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users")) || [];
+
+    users.push({ username, password });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Account created successfully!");
+
+    window.location.href = "login.html";
+}
