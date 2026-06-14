@@ -82,6 +82,7 @@ function addSignal(pair, type, entry, tp, sl) {
     localStorage.setItem("signals", JSON.stringify(signals));
 
     alert("Signal Saved!");
+    alert("🚀 New Signal Added!");
 }
 
 // DELETE SIGNAL
@@ -116,3 +117,23 @@ function logout() {
     localStorage.removeItem("isAdmin");
     window.location.href = "login.html";
 }
+
+function calculateProfit() {
+    const lot = document.getElementById("lot").value;
+    const pips = document.getElementById("pips").value;
+
+    const profit = lot * pips * 10;
+
+    document.getElementById("result").innerText =
+        "Estimated Profit: $" + profit;
+}
+
+function updateStats() {
+    const total = signals.length;
+    const closed = signals.filter(s => s.status === "CLOSED").length;
+
+    document.getElementById("total").innerText = total;
+    document.getElementById("closed").innerText = closed;
+}
+
+updateStats();

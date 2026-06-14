@@ -20,6 +20,23 @@
     <section class="dashboard">
     <h1>Live Forex Signals</h1>
 
+<h2>Profit Calculator</h2>
+
+<div class="calculator">
+    <input type="number" id="lot" placeholder="Lot Size (e.g 0.1)">
+    <input type="number" id="pips" placeholder="Pips">
+    <button onclick="calculateProfit()">Calculate</button>
+
+    <p id="result"></p>
+</div>
+
+<h2>Performance</h2>
+
+<div class="stats">
+    <p>Total Signals: <span id="total"></span></p>
+    <p>Closed Signals: <span id="closed"></span></p>
+</div>
+
     <div id="signals-container"></div>
 </section>
 
