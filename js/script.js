@@ -106,29 +106,31 @@ function closeSignal(index) {
 
 // LOGIN
 function login() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ✅ Check admin
-    if (username === "admin" && password === "1234") {
-        localStorage.setItem("isAdmin", "true");
-        window.location.href = "admin.html";
-        return;
-    }
-
-    // ✅ Check registered users
+    // ✅ FIRST: check registered users
     const validUser = users.find(user =>
         user.username === username && user.password === password
     );
 
     if (validUser) {
         localStorage.setItem("isUser", "true");
+        localStorage.setItem("currentUser", username);
         window.location.href = "dashboard.html";
-    } else {
-        alert("Invalid login credentials");
+        return;
     }
+
+    // ✅ THEN: check admin
+    if (username === "admin" && password === "1234") {
+        localStorage.setItem("isAdmin", "true");
+        window.location.href = "admin.html";
+        return;
+    }
+
+    alert("Invalid login credentials");
 }
 
 // LOGOUT
@@ -168,6 +170,10 @@ function register() {
     if (!username || !password) {
         alert("Please fill all fields");
         return;
+    }
+    if (username === "admin") {
+    alert("This username is reserved");
+    return;
     }
 
     let users = JSON.parse(localStorage.getItem("users")) || [];
