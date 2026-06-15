@@ -160,3 +160,17 @@ button {
 .sell {
     border-left: 5px solid red;
 }
+
+.hero button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    background: gold;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hero button:hover {
+    background: orange;
+}
