@@ -109,9 +109,23 @@ function login() {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
 
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+
+    // ✅ Check admin
     if (username === "admin" && password === "1234") {
         localStorage.setItem("isAdmin", "true");
         window.location.href = "admin.html";
+        return;
+    }
+
+    // ✅ Check registered users
+    const validUser = users.find(user =>
+        user.username === username && user.password === password
+    );
+
+    if (validUser) {
+        localStorage.setItem("isUser", "true");
+        window.location.href = "dashboard.html";
     } else {
         alert("Invalid login credentials");
     }
@@ -120,6 +134,7 @@ function login() {
 // LOGOUT
 function logout() {
     localStorage.removeItem("isAdmin");
+    localStorage.removeItem("isUser");
     window.location.href = "login.html";
 }
 
@@ -172,4 +187,13 @@ function goToRegister() {
 
 function goToLogin() {
     window.location.href = "login.html";
+}
+
+// PROTECT USER DASHBOARD
+if (window.location.pathname.includes("dashboard.html")) {
+    const isUser = localStorage.getItem("isUser");
+
+    if (isUser !== "true") {
+        window.location.href = "login.html";
+    }
 }
