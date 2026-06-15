@@ -7,6 +7,15 @@ if (window.location.pathname.includes("admin.html")) {
     }
 }
 
+// PROTECT USER DASHBOARD
+if (window.location.pathname.includes("dashboard.html")) {
+    const isUser = localStorage.getItem("isUser");
+
+    if (isUser !== "true") {
+        window.location.href = "login.html";
+    }
+}
+
 // NAVIGATION
 function joinNow() {
     window.location.href = "dashboard.html";
@@ -111,22 +120,25 @@ function login() {
 
     const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // ✅ FIRST: check registered users
+    // 🔹 ADMIN LOGIN (FIRST)
+    if (username === "admin" && password === "1234") {
+        localStorage.setItem("isAdmin", "true");
+        localStorage.removeItem("isUser");
+
+        window.location.href = "admin.html";
+        return;
+    }
+
+    // 🔹 CLIENT LOGIN
     const validUser = users.find(user =>
         user.username === username && user.password === password
     );
 
     if (validUser) {
         localStorage.setItem("isUser", "true");
-        localStorage.setItem("currentUser", username);
-        window.location.href = "dashboard.html";
-        return;
-    }
+        localStorage.removeItem("isAdmin");
 
-    // ✅ THEN: check admin
-    if (username === "admin" && password === "1234") {
-        localStorage.setItem("isAdmin", "true");
-        window.location.href = "admin.html";
+        window.location.href = "dashboard.html";
         return;
     }
 
@@ -193,13 +205,4 @@ function goToRegister() {
 
 function goToLogin() {
     window.location.href = "login.html";
-}
-
-// PROTECT USER DASHBOARD
-if (window.location.pathname.includes("dashboard.html")) {
-    const isUser = localStorage.getItem("isUser");
-
-    if (isUser !== "true") {
-        window.location.href = "login.html";
-    }
 }
