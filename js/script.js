@@ -1,3 +1,4 @@
+
 // PROTECT ADMIN PAGE
 if (window.location.pathname.includes("admin.html")) {
     const isAdmin = localStorage.getItem("isAdmin");
@@ -22,16 +23,27 @@ function joinNow() {
 }
 
 // SIGNAL DATA
-let signals = JSON.parse(localStorage.getItem("signals")) || [
-    {
-        pair: "GOLD (XAUUSD)",
-        type: "BUY",
-        entry: "2350.00",
-        tp: "2365.00",
-        sl: "2340.00",
-        status: "ACTIVE"
-    }
-];
+let signals = [];
+
+try {
+    signals = JSON.parse(localStorage.getItem("signals")) || [];
+} catch {
+    signals = [];
+}
+
+// fallback default if empty
+if (signals.length === 0) {
+    signals = [
+        {
+            pair: "GOLD (XAUUSD)",
+            type: "BUY",
+            entry: "2350.00",
+            tp: "2365.00",
+            sl: "2340.00",
+            status: "ACTIVE"
+        }
+    ];
+}
 
 // DISPLAY SIGNALS
 function loadSignals() {
@@ -78,7 +90,19 @@ if (
 }
 
 // ADD SIGNAL FROM ADMIN
-function addSignal(pair, type, entry, tp, sl) {
+function addSignal() {
+    const pair = document.getElementById("pair").value;
+    const type = document.getElementById("type").value;
+    const entry = document.getElementById("entry").value;
+    const tp = document.getElementById("tp").value;
+    const sl = document.getElementById("sl").value;
+
+    // 🚨 validation
+    if (!pair || !type || !entry || !tp || !sl) {
+        alert("Please fill all fields");
+        return;
+    }
+
     const newSignal = {
         pair,
         type,
@@ -92,8 +116,8 @@ function addSignal(pair, type, entry, tp, sl) {
 
     localStorage.setItem("signals", JSON.stringify(signals));
 
-    updateStats();
-    alert("🚀 New Signal Added!");
+    alert("Signal Added!");
+    loadSignals();
 }
 
 // DELETE SIGNAL
@@ -205,4 +229,4 @@ function goToRegister() {
 
 function goToLogin() {
     window.location.href = "login.html";
-}
+ }  

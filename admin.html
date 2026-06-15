@@ -20,14 +20,16 @@
     <section class="dashboard">
         <h1>Add New Signal</h1>
 
-        <input type="text" id="pair" placeholder="Pair (e.g. GOLD)">
-        <input type="text" id="type" placeholder="Type (BUY or SELL)">
-        <input type="text" id="entry" placeholder="Entry">
-        <input type="text" id="tp" placeholder="Take Profit">
-        <input type="text" id="sl" placeholder="Stop Loss">
+        <input id="pair" placeholder="Pair (e.g. EURUSD)">
+<select id="type">
+    <option value="BUY">BUY</option>
+    <option value="SELL">SELL</option>
+</select>
+<input id="entry" placeholder="Entry">
+<input id="tp" placeholder="Take Profit">
+<input id="sl" placeholder="Stop Loss">
 
-        <br><br>
-        <button onclick="addSignal()">Add Signal</button>
+<button onclick="addSignal()">Add Signal</button>
         
         <div id="signals-container"></div>
     </section>
