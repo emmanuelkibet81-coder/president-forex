@@ -174,3 +174,8 @@ button {
 .hero button:hover {
     background: orange;
 }
+
+.chart-container {
+    margin: 40px auto;
+    width: 95%;
+}
