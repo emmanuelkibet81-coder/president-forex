@@ -191,14 +191,21 @@ function calculateProfit() {
 function updateStats() {
     const totalEl = document.getElementById("total");
     const closedEl = document.getElementById("closed");
+    const activeEl = document.getElementById("active"); // 👈 new
 
     if (!totalEl || !closedEl) return;
 
     const total = signals.length;
     const closed = signals.filter(s => s.status === "CLOSED").length;
+    const active = total - closed;
 
     totalEl.innerText = total;
     closedEl.innerText = closed;
+
+    // 👇 only if element exists
+    if (activeEl) {
+        activeEl.innerText = active;
+    }
 }
 
 function register() {
